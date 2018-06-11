@@ -385,7 +385,7 @@ public final class StringUtil {
     public static List<String> getDeleteElements(List<String> openBuildIds, List<String> applicationBuildIds) {
         
         List<String> deleteElements = new ArrayList<>();
-        if(!CommonUtil.isListEmpty(applicationBuildIds)){
+        if(!CollectionUtils.isEmpty(applicationBuildIds)){
             for (String applicationBuild : applicationBuildIds) {
                 if(!openBuildIds.contains(applicationBuild)){
                     deleteElements.add(applicationBuild);
@@ -421,7 +421,7 @@ public final class StringUtil {
 
     public static String convertListToStringBuilderContainJingHao(List<String> areaNames) {
         StringBuilder sb = new StringBuilder();
-        if(!CommonUtil.isListEmpty(areaNames)){
+        if(!CollectionUtils.isEmpty(areaNames)){
             for (String string : areaNames) {
                 sb.append(",").append(string);
             }

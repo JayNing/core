@@ -48,6 +48,22 @@ public class DateUtil {
 
     }
 
+    /**
+     * 判断时间是否过期
+     * @param startTime 计时时间
+     * @param timePeriodBySeconds 有效期(秒)
+     * @return
+     */
+    public static boolean timeExpired(Long startTime, int timePeriodBySeconds) {
+        if ((startTime + (timePeriodBySeconds * BaseContants.ONE_THOUSAND)) < System.currentTimeMillis()) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 获取两个日期时间之间的字符串日期集合
+     * */
     public static List<String> getDateList(Date startDate, Date endDate) {
         List<String> dateList = new ArrayList<>();
         Date bStartDate = DateUtil.getDateBegining(startDate);
