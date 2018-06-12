@@ -156,7 +156,7 @@ public class LambdaTest {
         System.out.println(list3);
         //类似分页效果, skip(10).limit(10) ：跳过前10条，相当于查询第二页，每页10条
         List<Integer> list4 = Stream.iterate(1, x -> x + 1).limit(50).sorted((a,b) -> b -a).skip(10).limit(10).collect(Collectors.toList());
-       System.out.println(list4);
+        System.out.println(list4);
         //////////////////////  Stream API - end  ////////////////////////
     }
 
