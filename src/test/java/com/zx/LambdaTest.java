@@ -134,12 +134,17 @@ public class LambdaTest {
         System.out.println(count);
         //截取
         Arrays.asList(1, 2, 3, 4, 5, 6).stream().limit(3).forEach(System.out::println);
+        System.out.println("===================================");
         //求平均值
         double asDouble = Arrays.asList(1, 2, 3, 4, 5, 6).stream().mapToInt(x -> x).average().getAsDouble();
         System.out.println(asDouble);
         //查找任意匹配的元素
         Optional<Integer> first = Arrays.asList(1, 2, 3, 4, 5, 6).stream().filter(x -> x % 2 == 0).findAny();
         System.out.println(first.get());
+        System.out.println("*********************************");
+        List<Integer> collect3 = Arrays.asList(1, 2, 3, 4, 5, 6).stream().filter(x -> x % 2 == 0).collect(Collectors.toList());
+        System.out.println(collect3);
+        System.out.println("##############################");
         //查找第一个匹配的元素
         Optional<Integer> first1 = Arrays.asList(1, 2, 3, 4, 5, 6).stream().filter(x -> x % 2 == 0).sorted((a,b) -> b -a).findFirst();
         System.out.println(first1.get());
@@ -177,6 +182,7 @@ public class LambdaTest {
     static String convertUp(String a){
         return a.toUpperCase();
     }
+
     static Integer getLength(String a, String b){
         return a.length() + b.length();
     }
