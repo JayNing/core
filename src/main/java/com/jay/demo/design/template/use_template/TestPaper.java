@@ -3,7 +3,7 @@ package com.jay.demo.design.template.use_template;
 /**
  * @Author JAY
  * @Date 2018/11/9 10:41
- * @Description 考试试卷
+ * @Description 考试试卷【使用了模板方法模式】
  **/
 public class TestPaper {
 

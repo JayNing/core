@@ -3,7 +3,7 @@ package com.jay.demo.design.template.no_use_template;
 /**
  * @Author JAY
  * @Date 2018/11/9 10:38
- * @Description 考试测试
+ * @Description 考试测试【没有使用模板方法模式】
  **/
 public class PaperTest {
 
