@@ -27,6 +27,7 @@
       <scope>test</scope>
     </dependency>
 
+
     <!-- slf4j start -->
     <dependency>
       <groupId>org.slf4j</groupId>
@@ -79,6 +80,71 @@
       <artifactId>gson</artifactId>
       <version>2.5</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.cxf/cxf-bundle -->
+    <dependency>
+      <groupId>org.apache.cxf</groupId>
+      <artifactId>cxf-bundle</artifactId>
+      <version>2.7.18</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/axis/axis-wsdl4j -->
+    <dependency>
+      <groupId>axis</groupId>
+      <artifactId>axis-wsdl4j</artifactId>
+      <version>1.5.1</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/axis/axis-jaxrpc -->
+    <dependency>
+      <groupId>axis</groupId>
+      <artifactId>axis-jaxrpc</artifactId>
+      <version>1.4</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.axis/axis -->
+    <dependency>
+      <groupId>org.apache.axis</groupId>
+      <artifactId>axis</artifactId>
+      <version>1.4</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/commons-discovery/commons-discovery -->
+    <dependency>
+      <groupId>commons-discovery</groupId>
+      <artifactId>commons-discovery</artifactId>
+      <version>0.5</version>
+    </dependency>
+<!--
+    &lt;!&ndash;&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.axis2/axis2 &ndash;&gt;&ndash;&gt;
+    &lt;!&ndash;<dependency>&ndash;&gt;
+      &lt;!&ndash;<groupId>org.apache.axis2</groupId>&ndash;&gt;
+      &lt;!&ndash;<artifactId>axis2</artifactId>&ndash;&gt;
+      &lt;!&ndash;<version>1.7.9</version>&ndash;&gt;
+      &lt;!&ndash;<type>pom</type>&ndash;&gt;
+    &lt;!&ndash;</dependency>&ndash;&gt;
+    &lt;!&ndash;&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.ws.commons.axiom/axiom-api &ndash;&gt;&ndash;&gt;
+    &lt;!&ndash;<dependency>&ndash;&gt;
+      &lt;!&ndash;<groupId>org.apache.ws.commons.axiom</groupId>&ndash;&gt;
+      &lt;!&ndash;<artifactId>axiom-api</artifactId>&ndash;&gt;
+      &lt;!&ndash;<version>1.2.22</version>&ndash;&gt;
+    &lt;!&ndash;</dependency>&ndash;&gt;
+    &lt;!&ndash;&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.ws.commons.axiom/axiom-impl &ndash;&gt;&ndash;&gt;
+    &lt;!&ndash;<dependency>&ndash;&gt;
+      &lt;!&ndash;<groupId>org.apache.ws.commons.axiom</groupId>&ndash;&gt;
+      &lt;!&ndash;<artifactId>axiom-impl</artifactId>&ndash;&gt;
+      &lt;!&ndash;<version>1.2.22</version>&ndash;&gt;
+    &lt;!&ndash;</dependency>&ndash;&gt;
+    &lt;!&ndash;&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.ws.commons.axiom/axiom-impl &ndash;&gt;&ndash;&gt;
+    &lt;!&ndash;<dependency>&ndash;&gt;
+      &lt;!&ndash;<groupId>org.apache.ws.commons.axiom</groupId>&ndash;&gt;
+      &lt;!&ndash;<artifactId>axiom-dom</artifactId>&ndash;&gt;
+      &lt;!&ndash;<version>1.2.22</version>&ndash;&gt;
+    &lt;!&ndash;</dependency>&ndash;&gt;
+    &lt;!&ndash;&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.axis2/axis2-spring &ndash;&gt;&ndash;&gt;
+    &lt;!&ndash;<dependency>&ndash;&gt;
+      &lt;!&ndash;<groupId>org.apache.axis2</groupId>&ndash;&gt;
+      &lt;!&ndash;<artifactId>axis2-spring</artifactId>&ndash;&gt;
+      &lt;!&ndash;<version>1.7.9</version>&ndash;&gt;
+    &lt;!&ndash;</dependency>-->-->
+
 
   </dependencies>
 
