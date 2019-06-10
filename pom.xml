@@ -112,40 +112,12 @@
       <artifactId>commons-discovery</artifactId>
       <version>0.5</version>
     </dependency>
-<!--
-    &lt;!&ndash;&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.axis2/axis2 &ndash;&gt;&ndash;&gt;
-    &lt;!&ndash;<dependency>&ndash;&gt;
-      &lt;!&ndash;<groupId>org.apache.axis2</groupId>&ndash;&gt;
-      &lt;!&ndash;<artifactId>axis2</artifactId>&ndash;&gt;
-      &lt;!&ndash;<version>1.7.9</version>&ndash;&gt;
-      &lt;!&ndash;<type>pom</type>&ndash;&gt;
-    &lt;!&ndash;</dependency>&ndash;&gt;
-    &lt;!&ndash;&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.ws.commons.axiom/axiom-api &ndash;&gt;&ndash;&gt;
-    &lt;!&ndash;<dependency>&ndash;&gt;
-      &lt;!&ndash;<groupId>org.apache.ws.commons.axiom</groupId>&ndash;&gt;
-      &lt;!&ndash;<artifactId>axiom-api</artifactId>&ndash;&gt;
-      &lt;!&ndash;<version>1.2.22</version>&ndash;&gt;
-    &lt;!&ndash;</dependency>&ndash;&gt;
-    &lt;!&ndash;&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.ws.commons.axiom/axiom-impl &ndash;&gt;&ndash;&gt;
-    &lt;!&ndash;<dependency>&ndash;&gt;
-      &lt;!&ndash;<groupId>org.apache.ws.commons.axiom</groupId>&ndash;&gt;
-      &lt;!&ndash;<artifactId>axiom-impl</artifactId>&ndash;&gt;
-      &lt;!&ndash;<version>1.2.22</version>&ndash;&gt;
-    &lt;!&ndash;</dependency>&ndash;&gt;
-    &lt;!&ndash;&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.ws.commons.axiom/axiom-impl &ndash;&gt;&ndash;&gt;
-    &lt;!&ndash;<dependency>&ndash;&gt;
-      &lt;!&ndash;<groupId>org.apache.ws.commons.axiom</groupId>&ndash;&gt;
-      &lt;!&ndash;<artifactId>axiom-dom</artifactId>&ndash;&gt;
-      &lt;!&ndash;<version>1.2.22</version>&ndash;&gt;
-    &lt;!&ndash;</dependency>&ndash;&gt;
-    &lt;!&ndash;&lt;!&ndash; https://mvnrepository.com/artifact/org.apache.axis2/axis2-spring &ndash;&gt;&ndash;&gt;
-    &lt;!&ndash;<dependency>&ndash;&gt;
-      &lt;!&ndash;<groupId>org.apache.axis2</groupId>&ndash;&gt;
-      &lt;!&ndash;<artifactId>axis2-spring</artifactId>&ndash;&gt;
-      &lt;!&ndash;<version>1.7.9</version>&ndash;&gt;
-    &lt;!&ndash;</dependency>-->-->
-
-
+    <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>27.1-jre</version>
+    </dependency>
   </dependencies>
 
   <build>

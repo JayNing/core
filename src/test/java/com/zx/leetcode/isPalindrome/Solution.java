@@ -14,7 +14,7 @@ public class Solution {
 
     public static boolean isPalindrome(int x) {
 
-        //需要考虑数字反转之后是否超过int的界限
+        //需要考虑数字反转之后是否超过int的界限，所以用double来作为转换后的存储类型
 
         if(x < 0){
             return false;
