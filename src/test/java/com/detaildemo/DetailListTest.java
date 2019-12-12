@@ -1,7 +1,8 @@
 package com.detaildemo;
 
 
-import com.alibaba.fastjson.JSONObject;
+import com.detaildemo.entity.DetailEntity;
+import com.detaildemo.entity.QueryEntity;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

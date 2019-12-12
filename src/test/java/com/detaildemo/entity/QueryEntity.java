@@ -1,4 +1,4 @@
-package com.detaildemo;
+package com.detaildemo.entity;
 
 /**
  * 查询条件实体类

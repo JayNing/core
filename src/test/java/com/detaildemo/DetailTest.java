@@ -2,15 +2,16 @@ package com.detaildemo;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.detaildemo.cache.DataCache;
+import com.detaildemo.entity.DetailEntity;
+import com.detaildemo.entity.QueryEntity;
+import com.detaildemo.util.GsonUtils;
 import com.google.common.collect.Sets;
-import org.eclipse.jetty.util.BlockingArrayQueue;
+import redis.clients.jedis.Jedis;
 
 import java.time.LocalTime;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -22,22 +23,43 @@ public class DetailTest {
 //    private static Executor executor = new ThreadPoolExecutor(5,5,300, TimeUnit.SECONDS,new BlockingArrayQueue<>());
 
     public static void main(String[] args) {
-        List<DetailEntity> detailEntities = dataList(300000);
-        Map<String, Map<String, Object>> stringMap = groupBy(detailEntities);
+//        //连接redis数据库
+        long beginl = System.currentTimeMillis();
+        Jedis jedis = new Jedis("127.0.0.1", 6379);
+        long endl = System.currentTimeMillis();
+        System.out.println("连接耗时：" + (endl - beginl) + "ms");
 
-//        String s = JSONObject.toJSONString(stringMap);
-//        System.out.println(s);
+        List<DetailEntity> detailEntities = DetailTest.dataList(300000);
+        Map<String, Map<String, Object>> stringMaps = DetailTest.groupBy(detailEntities);
 
-        long begin = System.currentTimeMillis();
+        DataCache.set("modelCodeDataList", stringMaps);
+
         System.out.println("开始时间：" + LocalTime.now());
+        long begin = System.currentTimeMillis();
+
+
+        long get1 = System.currentTimeMillis();
+        Map<String, Map<String, Object>> stringMap = DataCache.get("modelCodeDataList");
+//        Map<String, Map<String, Object>> stringMap = new HashMap<>();
+//        for (int i = 1; i <= 6; i++){
+//            String json = jedis.get("modelCodeDataList" + i);
+//            stringMap.putAll(GsonUtils.toMap(json));
+//        }
+
+//        Map<String, Map<String, Object>> stringMap = getDataFromRedis(jedis);
+        long get2 = System.currentTimeMillis();
+        System.out.println("取数据耗时：" + (get2 - get1) + "ms");
+
+//        List<DetailEntity> detailEntities = DetailTest.dataList(300000);
+//        Map<String, Map<String, Object>> stringMap = DetailTest.groupBy(detailEntities);
+
         Map<String, Map<String, Object>> stringListMap = new HashMap<>();
-
-
 
         stringListMap = testSearch(stringListMap,stringMap);
 //        stringListMap = testSearchCondition(stringMap);
 
         System.out.println("stringListMap.size() = " + stringListMap.size());
+//        System.out.println("stringListMap = " + JSONObject.toJSONString(stringListMap));
 //        System.out.println("stringListMap = " + JSONObject.toJSONString(stringListMap));
 
 //        List<Map<String, Object>> result2 = new ArrayList(stringListMap.values());
@@ -49,6 +71,29 @@ public class DetailTest {
 
 //        String s = JSONObject.toJSONString(pageList);
 //        System.out.println(s);
+    }
+
+    private static Map<String, Map<String, Object>> getDataFromRedis(Jedis jediss) {
+        Map<String, Map<String, Object>> stringMap = new HashMap<>();
+        final CountDownLatch latch = new CountDownLatch(6);
+        for (int i = 1; i <= 6; i++){
+            int finalI = i;
+            new Thread(() -> {
+                Jedis jedis = new Jedis("127.0.0.1", 6379);
+                String json = jedis.get("modelCodeDataList" + finalI);
+                System.out.println(Thread.currentThread().getName() + ":" + json.length());
+                stringMap.putAll(GsonUtils.toMap(json));
+                System.out.println(latch.getCount());
+                latch.countDown();
+            },"Thread" + finalI).start();
+        }
+        try {
+            latch.await();
+            System.out.println("线程执行完毕");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return stringMap;
     }
 
     private static Map<String, Map<String, Object>> testSearchCondition(Map<String, Map<String, Object>> stringMap) {
@@ -65,7 +110,7 @@ public class DetailTest {
 
     private static Map<String, Map<String, Object>> testSearch(Map<String, Map<String, Object>> stringListMap, Map<String, Map<String, Object>> stringMap) {
 
-        final CountDownLatch latch = new CountDownLatch(3);
+        final CountDownLatch latch = new CountDownLatch(4);
         AtomicReference<Map<String, Map<String, Object>>> ageListMap = new AtomicReference<>();
         new Thread(() -> {
             long a = System.currentTimeMillis();
@@ -87,10 +132,19 @@ public class DetailTest {
         AtomicReference<Map<String, Map<String, Object>>> addrListMap = new AtomicReference<>();
         new Thread(() -> {
             long a = System.currentTimeMillis();
-            addrListMap.set(search("addr", "==", "19和2", stringMap));
+            addrListMap.set(search("addr", "like", "2", stringMap));
             latch.countDown();
             long b = System.currentTimeMillis();
             System.out.println("Thread3 耗时:" + (b - a) + "ms");
+        }).start();
+
+        AtomicReference<Map<String, Map<String, Object>>> phoneListMap = new AtomicReference<>();
+        new Thread(() -> {
+            long a = System.currentTimeMillis();
+            phoneListMap.set(search("phone", "==", "手机19", stringMap));
+            latch.countDown();
+            long b = System.currentTimeMillis();
+            System.out.println("Thread4 耗时:" + (b - a) + "ms");
         }).start();
 
         try {
@@ -101,20 +155,25 @@ public class DetailTest {
         System.out.println("ageListMap.size() = " + ageListMap.get().size());
         System.out.println("nameListMap.size() = " + nameListMap.get().size());
         System.out.println("addrListMap.size() = " + addrListMap.get().size());
+        System.out.println("phoneListMap.size() = " + phoneListMap.get().size());
         //取并集,or
-//        stringListMap.putAll(ageListMap.get());
-//        stringListMap.putAll(nameListMap.get());
-//        stringListMap.putAll(addrListMap.get());
+        stringListMap.putAll(ageListMap.get());
+        stringListMap.putAll(nameListMap.get());
+        stringListMap.putAll(addrListMap.get());
+        stringListMap.putAll(phoneListMap.get());
 
         //取交集, and
-        Set<String> nameKeys = nameListMap.get().keySet();
-        Set<String> ageKeys = ageListMap.get().keySet();
-        Set<String> addKeys = addrListMap.get().keySet();
-        Sets.SetView<String> intersection = Sets.intersection(nameKeys, ageKeys);
-        Sets.SetView<String> intersection1 = Sets.intersection(addKeys, intersection);
-        for (String key : intersection1) {
-            stringListMap.put(key, nameListMap.get().get(key));
-        }
+//        Set<String> nameKeys = nameListMap.get().keySet();
+//        Set<String> ageKeys = ageListMap.get().keySet();
+//        Set<String> addKeys = addrListMap.get().keySet();
+//        Set<String> phoneKeys = phoneListMap.get().keySet();
+//        Sets.SetView<String> intersection = Sets.intersection(nameKeys, ageKeys);
+//        Sets.SetView<String> intersection1 = Sets.intersection(addKeys, intersection);
+//        Sets.SetView<String> intersection2 = Sets.intersection(intersection1, phoneKeys);
+//
+//        for (String key : intersection2) {
+//            stringListMap.put(key, nameListMap.get().get(key));
+//        }
         return stringListMap;
     }
 
@@ -204,7 +263,7 @@ public class DetailTest {
     public static List<DetailEntity> dataList(int sum){
         List<DetailEntity> list = new ArrayList<>();
         for (int i = 0; i < sum; i++){
-            for (int j = 0; j < 3; j++){
+            for (int j = 0; j < 4; j++){
                 DetailEntity entity = null;
                 if (j == 0){
                     //添加姓名
@@ -215,6 +274,9 @@ public class DetailTest {
                 }else if (j == 2){
                     //添加地址
                     entity = new DetailEntity(i+"", "addr", i +"和" + j,"地址");
+                }else if (j == 3){
+                    //添加地址
+                    entity = new DetailEntity(i+"", "phone", "手机" + i,"手机");
                 }
                 list.add(entity);
             }

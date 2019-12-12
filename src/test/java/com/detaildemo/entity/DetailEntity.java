@@ -1,4 +1,4 @@
-package com.detaildemo;
+package com.detaildemo.entity;
 
 public class DetailEntity {
     private int id;

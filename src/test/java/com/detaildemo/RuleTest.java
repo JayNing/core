@@ -3,6 +3,7 @@ package com.detaildemo;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.detaildemo.entity.DetailEntity;
 import com.detaildemo.rule.drools.DroolsExecutor;
 import com.detaildemo.rule.drools.RuleType;
 import com.detaildemo.rule.drools.fact.FactData;
