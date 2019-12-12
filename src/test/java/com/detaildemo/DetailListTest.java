@@ -71,10 +71,7 @@ public class DetailListTest {
         },"Thread4").start();
 
         try {
-            System.out.println("等待4个子线程执行完毕...");
             latch.await();
-            System.out.println("4个子线程已经执行完毕");
-            System.out.println("继续执行主线程");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -84,8 +81,13 @@ public class DetailListTest {
         long end = System.currentTimeMillis();
         System.out.println("结束时间：" + LocalTime.now());
         System.out.println("花费时间：" + (end - begin) + "ms");
-        String s = JSONObject.toJSONString(rs);
-        System.out.println(s);
+
+       List<Map<String, Object>> result2 = new ArrayList(rs.values());
+//        List<Map<String, Object>> pageList = result2.subList(10, 20);
+
+
+//        String s = JSONObject.toJSONString(result2);
+//        System.out.println(s);
     }
 
     private static Map<String, Map<String, Object>> testSearchCondition(List<Map<String, Object>> stringList) {
@@ -145,24 +147,28 @@ public class DetailListTest {
     private static Boolean validDetail(List<QueryEntity> queryConditions, Map<String, Object> propDetail) {
         boolean flag = true;
         for (QueryEntity queryCondition : queryConditions) {
-            //每个查询条件都满足，说明数据有用，可保留
-            if (queryCondition.getQueryType().equalsIgnoreCase("like")){
-                String propVal = (String) propDetail.get(queryCondition.getPropCode());
-                if (!propVal.contains(queryCondition.getPropValue())){
-                    flag = false;
+            if (queryConditions.size() == 1){
+                //单条件查询
+                //每个查询条件都满足，说明数据有用，可保留
+                if (queryCondition.getQueryType().equalsIgnoreCase("like")){
+                    String propVal = (String) propDetail.get(queryCondition.getPropCode());
+                    if (!propVal.contains(queryCondition.getPropValue())){
+                        flag = false;
+                    }
+                }else if (queryCondition.getQueryType().equalsIgnoreCase("==")){
+                    String propVal = (String) propDetail.get(queryCondition.getPropCode());
+                    if (!propVal.equals(queryCondition.getPropValue())){
+                        flag = false;
+                    }
+                } else if (queryCondition.getQueryType().equalsIgnoreCase(">")){
+                    String propVal = (String) propDetail.get(queryCondition.getPropCode());
+                    if (Integer.valueOf(propVal) <= Integer.valueOf(queryCondition.getPropValue())){
+                        flag = false;
+                    }
                 }
-            }else if (queryCondition.getQueryType().equalsIgnoreCase("==")){
-                String propVal = (String) propDetail.get(queryCondition.getPropCode());
-                if (!propVal.equals(queryCondition.getPropValue())){
-                    flag = false;
-                }
-            } else if (queryCondition.getQueryType().equalsIgnoreCase(">")){
-                String propVal = (String) propDetail.get(queryCondition.getPropCode());
-                if (Integer.valueOf(propVal) <= Integer.valueOf(queryCondition.getPropValue())){
-                    flag = false;
-                }
+            } else {
+                //多条件查询
             }
-
         }
         return flag;
     }

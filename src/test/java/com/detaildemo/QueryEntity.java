@@ -8,6 +8,9 @@ public class QueryEntity {
     private String propCode;
     private String queryType;
     private String propValue;
+    private Boolean isPage;
+    private int pageSize;
+    private int pageNum;
 
     public QueryEntity(String propCode, String queryType, String propValue) {
         this.propCode = propCode;

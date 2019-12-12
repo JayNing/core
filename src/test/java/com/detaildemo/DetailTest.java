@@ -2,6 +2,7 @@ package com.detaildemo;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Sets;
 import org.eclipse.jetty.util.BlockingArrayQueue;
 
 import java.time.LocalTime;
@@ -39,15 +40,15 @@ public class DetailTest {
         System.out.println("stringListMap.size() = " + stringListMap.size());
 //        System.out.println("stringListMap = " + JSONObject.toJSONString(stringListMap));
 
-        List<Map<String, Object>> result2 = new ArrayList(stringListMap.values());
-        List<Map<String, Object>> pageList = result2.subList(10, 20);
+//        List<Map<String, Object>> result2 = new ArrayList(stringListMap.values());
+//        List<Map<String, Object>> pageList = result2.subList(10, 20);
 
         long end = System.currentTimeMillis();
         System.out.println("结束时间：" + LocalTime.now());
         System.out.println("花费时间：" + (end - begin) + "ms");
 
-        String s = JSONObject.toJSONString(pageList);
-        System.out.println(s);
+//        String s = JSONObject.toJSONString(pageList);
+//        System.out.println(s);
     }
 
     private static Map<String, Map<String, Object>> testSearchCondition(Map<String, Map<String, Object>> stringMap) {
@@ -101,19 +102,19 @@ public class DetailTest {
         System.out.println("nameListMap.size() = " + nameListMap.get().size());
         System.out.println("addrListMap.size() = " + addrListMap.get().size());
         //取并集,or
-        stringListMap.putAll(ageListMap.get());
-        stringListMap.putAll(nameListMap.get());
-        stringListMap.putAll(addrListMap.get());
+//        stringListMap.putAll(ageListMap.get());
+//        stringListMap.putAll(nameListMap.get());
+//        stringListMap.putAll(addrListMap.get());
 
         //取交集, and
-//        Set<String> nameKeys = nameListMap.keySet();
-//        Set<String> ageKeys = ageListMap.keySet();
-//        Set<String> addKeys = addrListMap.keySet();
-//        Sets.SetView<String> intersection = Sets.intersection(nameKeys, ageKeys);
-//        Sets.SetView<String> intersection1 = Sets.intersection(addKeys, intersection);
-//        for (String key : intersection1) {
-//            stringListMap.put(key, nameListMap.get(key));
-//        }
+        Set<String> nameKeys = nameListMap.get().keySet();
+        Set<String> ageKeys = ageListMap.get().keySet();
+        Set<String> addKeys = addrListMap.get().keySet();
+        Sets.SetView<String> intersection = Sets.intersection(nameKeys, ageKeys);
+        Sets.SetView<String> intersection1 = Sets.intersection(addKeys, intersection);
+        for (String key : intersection1) {
+            stringListMap.put(key, nameListMap.get().get(key));
+        }
         return stringListMap;
     }
 
