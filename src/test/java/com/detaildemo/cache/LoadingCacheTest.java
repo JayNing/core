@@ -29,14 +29,14 @@ public class LoadingCacheTest {
                         String newValue = String.valueOf(value.getAndIncrement());
                         System.out.println("load ");
                         try {
-                            TimeUnit.SECONDS.sleep(2);
+                            TimeUnit.SECONDS.sleep(3);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                         System.out.println("load end ");
                         return newValue;
                     }
-                    //异步加载数据，这样数据过期后，还能查询到旧数据，同时异步在刷新新数据
+                    //使用refreshAfterWrite设置缓存过期，然后异步加载数据。这样数据过期后，还能查询到旧数据，同时异步在刷新新数据
                     @Override
                     public ListenableFuture<String> reload(String key, String oldValue) throws Exception {
                         // asynchronous!
@@ -53,5 +53,4 @@ public class LoadingCacheTest {
         TimeUnit.SECONDS.sleep(10);
         System.out.println("value : " + cb.get("name"));
     }
-
 }

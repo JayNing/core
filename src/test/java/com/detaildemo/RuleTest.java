@@ -28,16 +28,16 @@ public class RuleTest {
 //        String json = "[{\"propertyCode\":\"phase\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"==\",\"value\":\"==\"},{\"propertyCode\":\"\",\"name\":\"24和0\",\"value\":\"\\\"24和0\\\"\"}]\n";
 //        validExpression(json);
 
-        String conditionConfig = "[{\"propertyCode\":\"phase\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"like\",\"value\":\"like\"},{\"propertyCode\":\"\",\"name\":\"24和0\",\"value\":\"\\\"24和0\\\"\"}]\n";
-        validExpression(conditionConfig);
+        String conditionConfig = "[{\"propertyCode\":\"name\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"like\",\"value\":\"like\"},{\"propertyCode\":\"\",\"name\":\"24和0\",\"value\":\"\\\"24和0\\\"\"}]\n";
+//        validExpression(conditionConfig);
 
 
         //筛选过滤数据
 //        String conditionConfig = "[{\"propertyCode\":\"age\",\"parentCode\":\"\",\"name\":\"年龄\",\"value\":\"$(\\\"age\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\">\",\"value\":\">\"},{\"propertyCode\":\"\",\"name\":\"20\",\"value\":\"\\\"20\\\"\"}]\n";
 //        String conditionConfig = "[{\"propertyCode\":\"name\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"==\",\"value\":\"==\"},{\"propertyCode\":\"\",\"name\":\"11和0\",\"value\":\"\\\"11和0\\\"\"}]\n";
-//        List<Map<String, Object>> dataList = filterData(conditionConfig);
-//        System.out.println("dataList => ");
-//        System.out.println(JSONObject.toJSONString(dataList));
+        List<Map<String, Object>> dataList = filterData(conditionConfig);
+        System.out.println("dataList => ");
+        System.out.println(JSONObject.toJSONString(dataList));
     }
 
     private static List<Map<String, Object>> filterData(String conditionConfig) {
