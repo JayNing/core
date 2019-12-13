@@ -23,11 +23,6 @@ public class DetailTest {
 //    private static Executor executor = new ThreadPoolExecutor(5,5,300, TimeUnit.SECONDS,new BlockingArrayQueue<>());
 
     public static void main(String[] args) {
-//        //连接redis数据库
-        long beginl = System.currentTimeMillis();
-        Jedis jedis = new Jedis("127.0.0.1", 6379);
-        long endl = System.currentTimeMillis();
-        System.out.println("连接耗时：" + (endl - beginl) + "ms");
 
         List<DetailEntity> detailEntities = DetailTest.dataList(300000);
         Map<String, Map<String, Object>> stringMaps = DetailTest.groupBy(detailEntities);
@@ -108,7 +103,7 @@ public class DetailTest {
         return searchByConditions(queryConditions, stringMap);
     }
 
-    private static Map<String, Map<String, Object>> testSearch(Map<String, Map<String, Object>> stringListMap, Map<String, Map<String, Object>> stringMap) {
+    public static Map<String, Map<String, Object>> testSearch(Map<String, Map<String, Object>> stringListMap, Map<String, Map<String, Object>> stringMap) {
 
         final CountDownLatch latch = new CountDownLatch(4);
         AtomicReference<Map<String, Map<String, Object>>> ageListMap = new AtomicReference<>();
@@ -275,7 +270,7 @@ public class DetailTest {
                     //添加地址
                     entity = new DetailEntity(i+"", "addr", i +"和" + j,"地址");
                 }else if (j == 3){
-                    //添加地址
+                    //添加手机
                     entity = new DetailEntity(i+"", "phone", "手机" + i,"手机");
                 }
                 list.add(entity);

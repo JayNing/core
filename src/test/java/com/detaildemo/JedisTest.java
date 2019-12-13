@@ -21,8 +21,8 @@ public class JedisTest {
         DataCache.set("modelCodeDataList", stringMap);
 
         //连接redis数据库
-//        Jedis jedis = new Jedis("127.0.0.1", 6379);
-//        jedis.set("modelCodeDataList", GsonUtils.toJsonString(stringMap));
+        Jedis jedis = new Jedis("127.0.0.1", 6379);
+        jedis.set("modelCodeDataList", GsonUtils.toJsonString(stringMap));
 
 
 //        Map<String, Map<String, Object>> intoRedisMap = new HashMap<>();
