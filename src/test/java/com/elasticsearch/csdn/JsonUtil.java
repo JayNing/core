@@ -1,6 +1,6 @@
 package com.elasticsearch.csdn;
 
-import com.detaildemo.util.GsonUtils;
+import com.detaildemo.demo1.util.GsonUtils;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
 

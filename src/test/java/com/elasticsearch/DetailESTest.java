@@ -1,8 +1,5 @@
 package com.elasticsearch;
 
-import com.detaildemo.DetailListTest;
-import com.detaildemo.entity.DetailEntity;
-import org.apache.poi.ss.formula.functions.T;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -15,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.net.InetAddress;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
