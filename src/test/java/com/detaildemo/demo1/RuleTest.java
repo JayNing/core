@@ -28,14 +28,15 @@ public class RuleTest {
 //        String json = "[{\"propertyCode\":\"phase\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"==\",\"value\":\"==\"},{\"propertyCode\":\"\",\"name\":\"24和0\",\"value\":\"\\\"24和0\\\"\"}]\n";
 //        validExpression(json);
 
-        String conditionConfig = "[{\"propertyCode\":\"name\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"like\",\"value\":\"like\"},{\"propertyCode\":\"\",\"name\":\"24和0\",\"value\":\"\\\"24和0\\\"\"}]\n";
+//        String conditionConfig = "[{\"propertyCode\":\"name\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"like\",\"value\":\"like\"},{\"propertyCode\":\"\",\"name\":\"24和0\",\"value\":\"\\\"24和0\\\"\"}]\n";
 //        validExpression(conditionConfig);
 
 
         //筛选过滤数据
 //        String conditionConfig = "[{\"propertyCode\":\"age\",\"parentCode\":\"\",\"name\":\"年龄\",\"value\":\"$(\\\"age\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\">\",\"value\":\">\"},{\"propertyCode\":\"\",\"name\":\"20\",\"value\":\"\\\"20\\\"\"}]\n";
-//        String conditionConfig = "[{\"propertyCode\":\"name\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"==\",\"value\":\"==\"},{\"propertyCode\":\"\",\"name\":\"11和0\",\"value\":\"\\\"11和0\\\"\"}]\n";
+        String conditionConfig = "[{\"propertyCode\":\"name\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"like\",\"value\":\"like\"},{\"propertyCode\":\"\",\"name\":\"2\",\"value\":\"\\\"2\\\"\"}]\n";
         List<Map<String, Object>> dataList = filterData(conditionConfig);
+        System.out.println("dataList.size => " + dataList.size());
         System.out.println("dataList => ");
         System.out.println(JSONObject.toJSONString(dataList));
     }
@@ -44,6 +45,7 @@ public class RuleTest {
 
         List<DetailEntity> detailEntities = DetailListTest.dataList(30);
         List<Map<String, Object>> dataEntities = DetailListTest.groupBy(detailEntities);
+        System.out.println("dataEntities.size => " + dataEntities.size());
         System.out.println("dataEntities => ");
         System.out.println(dataEntities);
         System.out.println("==========================");

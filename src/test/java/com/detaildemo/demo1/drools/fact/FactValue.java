@@ -139,6 +139,12 @@ public class FactValue {
         return false;
     }
 
+    public boolean contains(Object object) {
+        String thisValue = this.value;
+        String thatValue = getValue(object);
+        return thisValue.contains(thatValue);
+    }
+
     public boolean eq(Object object) {
         Integer compareResult = compareTo(object);
         return compareResult != null && compareResult == 0;

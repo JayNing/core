@@ -18,6 +18,8 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <drools.version>7.10.0.Final</drools.version>
+<!--    <drools.version>6.5.0.Final</drools.version>-->
+    <lombok.version>1.18.2</lombok.version>
   </properties>
 
   <dependencies>
@@ -39,6 +41,12 @@
       <version>${drools.version}</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+
+    </dependency>
 
     <dependency>
       <groupId>redis.clients</groupId>
