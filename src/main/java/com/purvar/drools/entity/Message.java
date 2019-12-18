@@ -21,4 +21,9 @@ public class Message {
     private String target;
     private String name;
 
+    public boolean add(String msg){
+        this.target = this.target + msg;
+        return true;
+    }
+
 }

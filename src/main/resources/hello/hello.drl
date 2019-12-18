@@ -20,10 +20,18 @@ rule "say-hi"
         print("hi," + $message.getTarget() + ", welcome to drools\n");
     end
 
-//规则2
+//规则2，模糊匹配
 rule "say-hi-like"
     when
         $message: Message(target contains name && target!=null)
     then
         print("hi," + $message.getName() + ", welcome to drools contains\n");
+    end
+
+//规则3， 执行model里的方法
+rule "say-hi-add"
+    when
+        $message: Message(add("宁") && target!=null)
+    then
+        print("hi," + $message.getTarget() + ", welcome to drools contains\n");
     end

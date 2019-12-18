@@ -22,33 +22,37 @@ public class RuleTest {
     private static final String PROPERTY_CODE = "propertyCode";
 
     public static void main(String[] args) {
+        int sum = 300000;
+        List<DetailEntity> detailEntities = DetailListTest.dataList(sum);
+        List<Map<String, Object>> dataEntities = DetailListTest.groupBy(detailEntities);
+        System.out.println("dataEntities.size => " + dataEntities.size());
+        System.out.println("==========================");
+        String conditionConfig = "[{\"propertyCode\":\"\",\"name\":\"(\",\"value\":\"(\"},{\"propertyCode\":\"name\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"like\",\"value\":\"like\"},{\"propertyCode\":\"\",\"name\":\"2\",\"value\":\"\\\"2\\\"\"},{\"propertyCode\":\"\",\"name\":\")\",\"value\":\")\"},{\"propertyCode\":\"\",\"name\":\"&&\",\"value\":\"&&\"},{\"propertyCode\":\"\",\"name\":\"(\",\"value\":\"(\"},{\"propertyCode\":\"age\",\"parentCode\":\"\",\"name\":\"年龄\",\"value\":\"$(\\\"age\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"==\",\"value\":\"==\"},{\"propertyCode\":\"\",\"name\":\"27\",\"value\":\"\\\"27\\\"\"},{\"propertyCode\":\"\",\"name\":\")\",\"value\":\")\"}]\n";
+        long begin = System.currentTimeMillis();
+        List<Map<String, Object>> dataList = filterData(conditionConfig, dataEntities);
+        long end = System.currentTimeMillis();
+        System.out.println("dataList.size => " + dataList.size());
+        System.out.println(sum + "数据量，筛选耗时 : " + (end - begin) + "ms");
+//        System.out.println("dataList => ");
+//        System.out.println(JSONObject.toJSONString(dataList));
+
 
         //验证表达式规则
 //        String json = "[{\"propertyCode\":\"\",\"name\":\"(\",\"value\":\"(\"},{\"propertyCode\":\"phase\",\"parentCode\":\"\",\"name\":\"阶段\",\"value\":\"$(\\\"phase\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"==\",\"value\":\"==\"},{\"propertyCode\":\"\",\"name\":\"001\",\"value\":\"\\\"001\\\"\"},{\"propertyCode\":\"\",\"name\":\")\",\"value\":\")\"},{\"propertyCode\":\"\",\"name\":\"&&\",\"value\":\"&&\"},{\"propertyCode\":\"\",\"name\":\"(\",\"value\":\"(\"},{\"propertyCode\":\"buildterraarea1\",\"parentCode\":\"\",\"name\":\"建设用地面积_分期\",\"value\":\"$(\\\"buildterraarea1\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"==\",\"value\":\"==\"},{\"propertyCode\":\"\",\"name\":\"001\",\"value\":\"\\\"001\\\"\"},{\"propertyCode\":\"\",\"name\":\")\",\"value\":\")\"}]\n";
 //        String json = "[{\"propertyCode\":\"phase\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"==\",\"value\":\"==\"},{\"propertyCode\":\"\",\"name\":\"24和0\",\"value\":\"\\\"24和0\\\"\"}]\n";
 //        validExpression(json);
 
-//        String conditionConfig = "[{\"propertyCode\":\"name\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"like\",\"value\":\"like\"},{\"propertyCode\":\"\",\"name\":\"24和0\",\"value\":\"\\\"24和0\\\"\"}]\n";
+//        String conditionConfig = "[{\"propertyCode\":\"\",\"name\":\"(\",\"value\":\"(\"},{\"propertyCode\":\"name\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"like\",\"value\":\"like\"},{\"propertyCode\":\"\",\"name\":\"2\",\"value\":\"\\\"2\\\"\"},{\"propertyCode\":\"\",\"name\":\")\",\"value\":\")\"},{\"propertyCode\":\"\",\"name\":\"||\",\"value\":\"||\"},{\"propertyCode\":\"\",\"name\":\"(\",\"value\":\"(\"},{\"propertyCode\":\"age\",\"parentCode\":\"\",\"name\":\"年龄\",\"value\":\"$(\\\"age\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\">\",\"value\":\">\"},{\"propertyCode\":\"\",\"name\":\"5\",\"value\":\"\\\"5\\\"\"},{\"propertyCode\":\"\",\"name\":\")\",\"value\":\")\"}]\n";
 //        validExpression(conditionConfig);
 
 
         //筛选过滤数据
-//        String conditionConfig = "[{\"propertyCode\":\"age\",\"parentCode\":\"\",\"name\":\"年龄\",\"value\":\"$(\\\"age\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\">\",\"value\":\">\"},{\"propertyCode\":\"\",\"name\":\"20\",\"value\":\"\\\"20\\\"\"}]\n";
-        String conditionConfig = "[{\"propertyCode\":\"name\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"like\",\"value\":\"like\"},{\"propertyCode\":\"\",\"name\":\"2\",\"value\":\"\\\"2\\\"\"}]\n";
-        List<Map<String, Object>> dataList = filterData(conditionConfig);
-        System.out.println("dataList.size => " + dataList.size());
-        System.out.println("dataList => ");
-        System.out.println(JSONObject.toJSONString(dataList));
+//        String conditionConfig = "[{\"propertyCode\":\"age\",\"parentCode\":\"\",\"name\":\"年龄\",\"value\":\"$(\\\"age\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\">\",\"value\":\">\"},{\"propertyCode\":\"\",\"name\":\"25\",\"value\":\"\\\"25\\\"\"}]\n";
+//        String conditionConfig = "[{\"propertyCode\":\"name\",\"parentCode\":\"\",\"name\":\"姓名\",\"value\":\"$(\\\"name\\\")\",\"modelCode\":\"p0012\"},{\"propertyCode\":\"\",\"name\":\"like\",\"value\":\"like\"},{\"propertyCode\":\"\",\"name\":\"2\",\"value\":\"\\\"2\\\"\"}]\n";
+
     }
 
-    private static List<Map<String, Object>> filterData(String conditionConfig) {
-
-        List<DetailEntity> detailEntities = DetailListTest.dataList(30);
-        List<Map<String, Object>> dataEntities = DetailListTest.groupBy(detailEntities);
-        System.out.println("dataEntities.size => " + dataEntities.size());
-        System.out.println("dataEntities => ");
-        System.out.println(dataEntities);
-        System.out.println("==========================");
+    private static List<Map<String, Object>> filterData(String conditionConfig, List<Map<String, Object>> dataEntities) {
 
         List<Map<String, Object>> resultList = new ArrayList<>();
 

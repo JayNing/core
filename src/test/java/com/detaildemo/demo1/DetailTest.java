@@ -8,7 +8,10 @@ import com.detaildemo.demo1.util.GsonUtils;
 import redis.clients.jedis.Jedis;
 
 import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -18,7 +21,7 @@ import java.util.stream.Collectors;
  */
 public class DetailTest {
 
-//    private static Executor executor = new ThreadPoolExecutor(5,5,300, TimeUnit.SECONDS,new BlockingArrayQueue<>());
+//    private static Executor executor = new ThreadPoolExecutor(4,4,10, TimeUnit.SECONDS,new BlockingArrayQueue<>());
 
     public static void main(String[] args) {
 
@@ -105,6 +108,13 @@ public class DetailTest {
 
         final CountDownLatch latch = new CountDownLatch(4);
         AtomicReference<Map<String, Map<String, Object>>> ageListMap = new AtomicReference<>();
+//        executor.execute(() -> {
+//            long a = System.currentTimeMillis();
+//            ageListMap.set(search("age", ">", "10",stringMap));
+//            latch.countDown();
+//            long b = System.currentTimeMillis();
+//            System.out.println("Thread1 耗时:" + (b - a) + "ms");
+//        });
         new Thread(() -> {
             long a = System.currentTimeMillis();
             ageListMap.set(search("age", ">", "10",stringMap));
@@ -114,6 +124,13 @@ public class DetailTest {
         }).start();
 
         AtomicReference<Map<String, Map<String, Object>>> nameListMap = new AtomicReference<>();
+//        executor.execute(() -> {
+//            long a = System.currentTimeMillis();
+//            nameListMap.set(search("name","like","19",stringMap));
+//            latch.countDown();
+//            long b = System.currentTimeMillis();
+//            System.out.println("Thread2 耗时:" + (b - a) + "ms");
+//        });
         new Thread(() -> {
             long a = System.currentTimeMillis();
             nameListMap.set(search("name","like","19",stringMap));
@@ -123,6 +140,13 @@ public class DetailTest {
         }).start();
 
         AtomicReference<Map<String, Map<String, Object>>> addrListMap = new AtomicReference<>();
+//        executor.execute(() -> {
+//            long a = System.currentTimeMillis();
+//            addrListMap.set(search("addr", "like", "2", stringMap));
+//            latch.countDown();
+//            long b = System.currentTimeMillis();
+//            System.out.println("Thread3 耗时:" + (b - a) + "ms");
+//        });
         new Thread(() -> {
             long a = System.currentTimeMillis();
             addrListMap.set(search("addr", "like", "2", stringMap));
@@ -132,6 +156,13 @@ public class DetailTest {
         }).start();
 
         AtomicReference<Map<String, Map<String, Object>>> phoneListMap = new AtomicReference<>();
+//        executor.execute(() -> {
+//            long a = System.currentTimeMillis();
+//            phoneListMap.set(search("phone", "==", "手机19", stringMap));
+//            latch.countDown();
+//            long b = System.currentTimeMillis();
+//            System.out.println("Thread4 耗时:" + (b - a) + "ms");
+//        });
         new Thread(() -> {
             long a = System.currentTimeMillis();
             phoneListMap.set(search("phone", "==", "手机19", stringMap));
