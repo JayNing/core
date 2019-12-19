@@ -1,4 +1,4 @@
-package com.jay.demo.design.proxy.dynamicproxy;
+package com.jay.demo.design.proxy.dynamicproxy.demo01;
 
 /**
  * @Author JAY
