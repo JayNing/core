@@ -109,6 +109,8 @@ public class MarkdownUtil {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder = stringBuilder.append("import java.util.Date;").append("\n");
         stringBuilder = stringBuilder.append("import java.util.List;").append("\n");
+        stringBuilder = stringBuilder.append("import java.util.Map;").append("\n");
+        stringBuilder = stringBuilder.append("import java.util.HashMap;").append("\n");
         //1、遍历返回参数集合
 
         //2、判断是否含有多值列表
@@ -160,6 +162,8 @@ public class MarkdownUtil {
                     StringBuilder stringBuilder2 = new StringBuilder();
                     stringBuilder2 = stringBuilder2.append("import java.util.Date;").append("\n");
                     stringBuilder2 = stringBuilder2.append("import java.util.List;").append("\n");
+                    stringBuilder2 = stringBuilder2.append("import java.util.Map;").append("\n");
+                    stringBuilder2 = stringBuilder2.append("import java.util.HashMap;").append("\n");
                     tableBeanMap.put("imports",stringBuilder2);
 
                     createFilterBean(tableBeanMap);
