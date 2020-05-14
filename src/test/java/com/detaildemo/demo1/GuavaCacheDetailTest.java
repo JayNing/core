@@ -3,9 +3,9 @@ package com.detaildemo.demo1;
 import com.detaildemo.demo1.entity.DetailEntity;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import org.springframework.util.StopWatch;
 
 import java.lang.instrument.Instrumentation;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +18,7 @@ public class GuavaCacheDetailTest {
     private static volatile Instrumentation instru;
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
+
         List<DetailEntity> detailEntities = DetailTest.dataList(300000);
         Map<String, Map<String, Object>> stringMap1 = DetailTest.groupBy(detailEntities);
 
@@ -27,9 +28,11 @@ public class GuavaCacheDetailTest {
                 .build();
         cache.put("modelCodeDataList",stringMap1);
         List<Long> timecost = new ArrayList<>();
+        StopWatch sw = new StopWatch();
         for (int i = 1 ; i <= 5 ; i++){
             System.out.println("第" + i + "次执行========================");
-            System.out.println("开始时间：" + LocalTime.now());
+//            System.out.println("开始时间：" + LocalTime.now());
+            sw.start("第" + i + "次");
             long begin = System.currentTimeMillis();
 
             long get1 = System.currentTimeMillis();
@@ -51,13 +54,17 @@ public class GuavaCacheDetailTest {
 
             System.out.println("stringListMap.size() = " + stringListMap.size());
 
-            long end = System.currentTimeMillis();
-            System.out.println("结束时间：" + LocalTime.now());
-            System.out.println("花费时间：" + (end - begin) + "ms");
-            timecost.add((end - begin));
-        }
+//            long end = System.currentTimeMillis();
+            sw.stop();
+//            System.out.println("结束时间：" + LocalTime.now());
+//            System.out.println("花费时间：" + (end - begin) + "ms");
+//            timecost.add((end - begin));
 
-        double average = timecost.stream().mapToInt(Long::intValue).average().getAsDouble();
+        }
+        System.out.println(sw.prettyPrint());
+
+//        double average = timecost.stream().mapToInt(Long::intValue).average().getAsDouble();
+        double average = sw.getTotalTimeMillis() / sw.getTaskCount();
         System.out.println("5次任务的平均耗时：" + average + "ms");
     }
 }

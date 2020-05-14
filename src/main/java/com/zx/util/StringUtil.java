@@ -444,4 +444,14 @@ public final class StringUtil {
 
         return year + BaseContants.LINE_CHAR + month + BaseContants.LINE_CHAR + day;
     }
+
+    public static String getFirstUp(String tableCode) {
+        if (tableCode == null || tableCode.length() == 0){
+            return "";
+        }
+        if (tableCode.length() == 1){
+            return tableCode.toUpperCase();
+        }
+        return tableCode.substring(0,1).toUpperCase() + tableCode.substring(1);
+    }
 }
