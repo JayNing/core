@@ -27,13 +27,84 @@ public class MarkdownUtil {
     private static String MD_FTL = "";
     private static String REQUEST_FILTER_BEAN = "";
     private static String RESPONSE_FIELD_BEAN = "";
+    private static String SERVICE_BEAN = "";
+    private static String CONFIG_BEAN = "";
     private static String BEAN_PACKAGE = "com.dynamic.code.bean";
+    private static String SERVICE_BEAN_PACKAGE = "com.dynamic.code.service";
+    private static String CONFIG_BEAN_PACKAGE = "com.dynamic.code.configuration";
     private static String RESPONSE_BEAN_PACKAGE = "com.dynamic.code.bean.table";
     private final static String LINE_SEPARATOR = System.getProperty("line.separator");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 //        testFilterBean("User");
-        testFieldBean("Person");
+//        testFieldBean("Person");
+        testServiceBean("PersonService");
+//        testConfigurationBean();
+    }
+
+    private static void testConfigurationBean() throws Exception {
+        Map<String, Object>  formBeanMap = new HashMap<String, Object>();
+        formBeanMap.put("beanName", "DynamicCodeConfig");
+        formBeanMap.put("classPackage", CONFIG_BEAN_PACKAGE);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder = stringBuilder.append("import java.util.Date;").append("\n");
+        stringBuilder = stringBuilder.append("import java.util.List;").append("\n");
+        stringBuilder = stringBuilder.append("import " + SERVICE_BEAN_PACKAGE + ".PersonService;").append("\n");
+        formBeanMap.put("imports",stringBuilder.toString());
+
+        List<Map<String, String>> paramsList = new ArrayList<Map<String, String>>();
+
+        Map<String, String> tmpParamMap = new HashMap<String, String>();
+        tmpParamMap.put("serviceName", "PersonService");
+        paramsList.add(tmpParamMap);
+
+        formBeanMap.put("params", paramsList);
+        formBeanMap.put("appId", "${mdmv2.appId}");
+        formBeanMap.put("appSecret", "${mdmv2.appSecret}");
+
+        String s = FreemarkerUtil.freemarkerProcess(CONFIG_BEAN, formBeanMap);
+        System.out.println(s);
+    }
+
+    private static void testServiceBean(String beanName) throws Exception {
+        Map<String, Object>  formBeanMap = new HashMap<String, Object>();
+        formBeanMap.put("beanName", beanName);
+        formBeanMap.put("classPackage", SERVICE_BEAN_PACKAGE);
+        String requestBean = "Person";
+        String responseBean = "Person";
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder = stringBuilder.append("import java.util.Date;").append("\n");
+        stringBuilder = stringBuilder.append("import java.util.List;").append("\n");
+        stringBuilder = stringBuilder.append("import java.util.Map;").append("\n");
+        stringBuilder = stringBuilder.append("import java.util.HashMap;").append("\n");
+        stringBuilder = stringBuilder.append("import " + BEAN_PACKAGE + "." + requestBean + ";").append("\n");
+        stringBuilder = stringBuilder.append("import " + BEAN_PACKAGE + "." + responseBean + ";").append("\n");
+
+
+        formBeanMap.put("imports",stringBuilder.toString());
+
+        List<Map<String, String>> paramsList = new ArrayList<Map<String, String>>();
+
+        Map<String, String> tmpParamMap = new HashMap<String, String>();
+        tmpParamMap.put("methodName", "Person");
+        tmpParamMap.put("requestBean", requestBean);
+        tmpParamMap.put("responseBean", requestBean);
+        tmpParamMap.put("isPage", "true");
+        paramsList.add(tmpParamMap);
+
+        Map<String, String> tmpParamMap2 = new HashMap<String, String>();
+        tmpParamMap2.put("methodName", "User");
+        tmpParamMap2.put("requestBean", requestBean);
+        tmpParamMap2.put("responseBean", requestBean);
+        tmpParamMap2.put("isPage", "false");
+        paramsList.add(tmpParamMap2);
+
+        formBeanMap.put("params", paramsList);
+
+        String s = FreemarkerUtil.freemarkerProcess(SERVICE_BEAN, formBeanMap);
+        System.out.println(s);
+
     }
 
 
@@ -111,7 +182,6 @@ public class MarkdownUtil {
         stringBuilder = stringBuilder.append("import java.util.List;").append("\n");
         stringBuilder = stringBuilder.append("import java.util.Map;").append("\n");
         stringBuilder = stringBuilder.append("import java.util.HashMap;").append("\n");
-        //1、遍历返回参数集合
 
         //2、判断是否含有多值列表
         List<ApiField> table = apiFieldModels.stream().filter(apiFieldModel ->
@@ -186,10 +256,6 @@ public class MarkdownUtil {
         formBeanMap.put("imports",stringBuilder.toString());
         formBeanMap.put("params", paramsList);
 
-
-
-
-
         return formBeanMap;
     }
 
@@ -241,6 +307,21 @@ public class MarkdownUtil {
             RESPONSE_FIELD_BEAN = IOUtils.toString(classPathResource.getInputStream(), "UTF-8");
         } catch (Exception e) {
             RESPONSE_FIELD_BEAN = "";
+            e.printStackTrace();
+        }
+        // 加载markdown模版
+        try {
+            ClassPathResource classPathResource = new ClassPathResource("md/Service.ftl");
+            SERVICE_BEAN = IOUtils.toString(classPathResource.getInputStream(), "UTF-8");
+        } catch (Exception e) {
+            SERVICE_BEAN = "";
+            e.printStackTrace();
+        }
+        try {
+            ClassPathResource classPathResource = new ClassPathResource("md/Configuration.ftl");
+            CONFIG_BEAN = IOUtils.toString(classPathResource.getInputStream(), "UTF-8");
+        } catch (Exception e) {
+            CONFIG_BEAN = "";
             e.printStackTrace();
         }
 

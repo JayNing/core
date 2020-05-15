@@ -1,5 +1,11 @@
-package ${classPackage};
-${imports}
+package com.dynamic.code.service;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import com.dynamic.code.bean.Person;
+import com.dynamic.code.bean.Person;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import com.util.HttpRequestTool;
@@ -7,32 +13,35 @@ import com.util.GsonUtils;
 import com.dynamic.code.model.PageModel;
 import com.dynamic.code.model.Response;
 
-public class ${beanName?cap_first} {
+public class PersonService {
 
     @Autowired
     private HttpRequestTool httpRequestTool;
 
-<#list params as param>
-    public Response request${param.methodName?cap_first}(${param.requestBean} params ){
+    public Response requestPerson(Person params ){
         String json = httpRequestTool.requestMethod(GsonUtils.toJsonString(params));
         Response response = GsonUtils.toBean(json, Response.class);
         String code = response.getCode();
         if ("2000".equals(code)){
             Object data = response.getData();
-        <#if param.isPage == "true">
             PageModel pageModel = GsonUtils.toBean(GsonUtils.toJsonString(data), PageModel.class);
             String content = GsonUtils.toJsonString(pageModel.getContent());
-            List<${param.responseBean}> users = GsonUtils.toList(content, ${param.responseBean}.class);
+            List<Person> users = GsonUtils.toList(content, Person.class);
             System.out.println("responseBean List: " + GsonUtils.toJsonString(users));
-        </#if>
-        <#if param.isPage == "false">
-            String content = GsonUtils.toJsonString(data);
-            List<${param.responseBean}> users = GsonUtils.toList(content, ${param.responseBean}.class);
-            System.out.println("responseBean List: " + GsonUtils.toJsonString(users));
-        </#if>
         }
         return response;
     }
-</#list>
+    public Response requestUser(Person params ){
+        String json = httpRequestTool.requestMethod(GsonUtils.toJsonString(params));
+        Response response = GsonUtils.toBean(json, Response.class);
+        String code = response.getCode();
+        if ("2000".equals(code)){
+            Object data = response.getData();
+            String content = GsonUtils.toJsonString(data);
+            List<Person> users = GsonUtils.toList(content, Person.class);
+            System.out.println("responseBean List: " + GsonUtils.toJsonString(users));
+        }
+        return response;
+    }
 
 }

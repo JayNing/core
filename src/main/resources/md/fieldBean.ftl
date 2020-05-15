@@ -1,6 +1,7 @@
-package {classPackage}
+package ${classPackage};
+${imports}
 
-public class ${beanName?cap_first}Form {
+public class ${beanName?cap_first} {
 
 <#list params as param>
     private ${param.paramType} ${param.paramName};
