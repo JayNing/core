@@ -50,32 +50,10 @@ public class HttpRequestTool {
             e.printStackTrace();
         }
         //json 没有分页
-        String json = "{\n" +
-                "    \"code\": \"2000\",\n" +
-                "    \"message\": null,\n" +
-                "    \"data\": [\n" +
-                "            {\n" +
-                "                \"username\": \"其他通讯服务\",\n" +
-                "                \"age\": 84634,\n" +
-                "                \"birthday\": \"2020-05-15 00:00:00\"\n" +
-                "            },\n" +
-                "            {\n" +
-                "                \"username\": \"李四\",\n" +
-                "                \"age\": 123,\n" +
-                "                \"birthday\": \"2020-05-16 00:00:00\"\n" +
-                "            }\n" +
-                "        ],\n" +
-                "    \"placeholder\": null,\n" +
-                "    \"errorMsg\": null\n" +
-                "}";
-
-        //json 带分页
-//
 //        String json = "{\n" +
 //                "    \"code\": \"2000\",\n" +
 //                "    \"message\": null,\n" +
-//                "    \"data\": {\n" +
-//                "        \"content\": [\n" +
+//                "    \"data\": [\n" +
 //                "            {\n" +
 //                "                \"username\": \"其他通讯服务\",\n" +
 //                "                \"age\": 84634,\n" +
@@ -87,14 +65,36 @@ public class HttpRequestTool {
 //                "                \"birthday\": \"2020-05-16 00:00:00\"\n" +
 //                "            }\n" +
 //                "        ],\n" +
-//                "        \"pageNum\": 1,\n" +
-//                "        \"pageSize\": 50,\n" +
-//                "        \"totalElements\": 1,\n" +
-//                "        \"pages\": 1\n" +
-//                "    },\n" +
 //                "    \"placeholder\": null,\n" +
 //                "    \"errorMsg\": null\n" +
 //                "}";
+
+        //json 带分页
+
+        String json = "{\n" +
+                "    \"code\": \"2000\",\n" +
+                "    \"message\": null,\n" +
+                "    \"data\": {\n" +
+                "        \"content\": [\n" +
+                "            {\n" +
+                "                \"username\": \"其他通讯服务\",\n" +
+                "                \"age\": 84634,\n" +
+                "                \"birthday\": \"2020-05-15 00:00:00\"\n" +
+                "            },\n" +
+                "            {\n" +
+                "                \"username\": \"李四\",\n" +
+                "                \"age\": 123,\n" +
+                "                \"birthday\": \"2020-05-16 00:00:00\"\n" +
+                "            }\n" +
+                "        ],\n" +
+                "        \"pageNum\": 1,\n" +
+                "        \"pageSize\": 50,\n" +
+                "        \"totalElements\": 1,\n" +
+                "        \"pages\": 1\n" +
+                "    },\n" +
+                "    \"placeholder\": null,\n" +
+                "    \"errorMsg\": null\n" +
+                "}";
 
         return json;
     }

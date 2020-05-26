@@ -22,13 +22,16 @@ public class ${beanName?cap_first} {
         <#if param.isPage == "true">
             PageModel pageModel = GsonUtils.toBean(GsonUtils.toJsonString(data), PageModel.class);
             String content = GsonUtils.toJsonString(pageModel.getContent());
-            List<${param.responseBean}> users = GsonUtils.toList(content, ${param.responseBean}.class);
-            System.out.println("responseBean List: " + GsonUtils.toJsonString(users));
+            List<${param.responseBean}> dataList = GsonUtils.toList(content, ${param.responseBean}.class);
+            pageModel.setContent(dataList);
+            response.setData(pageModel);
+            System.out.println("responseBean List: " + GsonUtils.toJsonString(dataList));
         </#if>
         <#if param.isPage == "false">
             String content = GsonUtils.toJsonString(data);
-            List<${param.responseBean}> users = GsonUtils.toList(content, ${param.responseBean}.class);
-            System.out.println("responseBean List: " + GsonUtils.toJsonString(users));
+            List<${param.responseBean}> dataList = GsonUtils.toList(content, ${param.responseBean}.class);
+            response.setData(dataList);
+            System.out.println("responseBean List: " + GsonUtils.toJsonString(dataList));
         </#if>
         }
         return response;

@@ -38,8 +38,8 @@ public class MarkdownUtil {
     public static void main(String[] args) throws Exception {
 //        testFilterBean("User");
 //        testFieldBean("Person");
-        testServiceBean("PersonService");
-//        testConfigurationBean();
+//        testServiceBean("PersonService");
+        testConfigurationBean();
     }
 
     private static void testConfigurationBean() throws Exception {
