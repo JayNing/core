@@ -45,7 +45,7 @@ public class MergeArray {
     public static void mergeV2(int[] nums1, int m, int[] nums2, int n) {
         int[] nums = new int[m];
         System.arraycopy(nums1, 0, nums, 0, m);
-
+        //双指针法
         int p1 = 0;
         int p2 = 0;
         int i = 0;
