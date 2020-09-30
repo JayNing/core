@@ -4,10 +4,15 @@ import com.detaildemo.demo1.util.GsonUtils;
 
 import java.util.Stack;
 
+/***
+ * 区间最大和，
+ * 给定任意整数数组，取中间任意区间组成的新数组，取新数组的最小值与新数组数据之和相乘，得到的最大值是多少
+ */
+
 public class MaxAreaSum {
 
     public static void main(String[] args) {
-        int[] numbers = {6,2,1};
+        int[] numbers = {4,3,6,7,2};
         System.out.println(getMax(numbers));
 
     }
@@ -35,7 +40,8 @@ public class MaxAreaSum {
                 } else {
                   left = index;
                 }
-                max = Math.max(max, numbers[index] * (sum[right] - sum[left]));
+                int i1 = numbers[index] * (sum[right] - sum[left]);
+                max = Math.max(max, i1);
             }
             stack.push(i);
         }
