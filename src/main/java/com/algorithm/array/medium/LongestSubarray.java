@@ -48,9 +48,112 @@ import java.util.Set;
 public class LongestSubarray {
 
     public static void main(String[] args) {
-       int[] nums = {8,2,4,7};
-       int limit = 4;
-        System.out.println(longestSubarray(nums,limit));
+       int[] nums = {8};
+       int limit = 10;
+       // longestSubarrayV2运行超时
+        System.out.println(longestSubarrayV2(nums,limit));
+    }
+
+    public static int longestSubarrayV3(int[] nums, int limit) {
+        int min;
+        int max;
+        int indexMin=0;//记录窗口中最大值的位置
+        int indexMax=0;;//记录窗口中最小值的位置
+        int i=0;
+        int number=1;//初始窗口大小为一
+        while(i<nums.length-1){
+            int j=i+1;
+            int start=i;
+            //符合条件进入循环
+            if(Math.abs(nums[j]-nums[i])<=limit) {
+                //符合条件的话就更新位置信息 ！！！！！！！！！！！ 重点在于更新位置信息，这是节约时间最关键的一步
+                if(nums[j]>nums[i]){
+                    indexMax=j;
+                    indexMin=i;
+                }else {
+                    indexMax=i;
+                    indexMin=j;
+                }
+                max = Math.max(nums[j], nums[i]);
+                min = Math.min(nums[j], nums[i]);
+                while (Math.abs(max - min) <= limit) {
+                    j++;
+                    if (j >= nums.length) break;
+                    //一定要写等于，不然可能出现一大堆相同的数字，导致超出时间，加个等于，就会选到最后一个符合条件的位置
+                    if(nums[j]>=max) {
+                        if(nums[j]-min>limit)
+                            i=indexMin+1;
+                        else
+                            indexMax = j;
+                    }
+                    if(nums[j]<=min) {
+                        if(max-nums[j]>limit)
+                            i=indexMax+1;
+                        else
+                            indexMin=j;
+                    }
+                    max = Math.max(nums[j], max);
+                    min = Math.min(nums[j], min);
+                }
+                //出来记录窗口的大小
+                number = Math.max(number, j - start);
+                if (j >= nums.length) break;
+
+            }else//不符合的直接加一
+                i++;
+
+
+        }
+        return number;
+
+    }
+
+    public static int longestSubarrayV2(int[] nums, int limit) {
+        if (nums.length == 1) {
+            return 1;
+        }
+
+        int left = 1;
+        int right = nums.length; // 7
+        int ans = 0;
+        while (left <= right){
+            //mid为区间组长度
+            int mid = (left + right) / 2; //4
+            if (checkMid(mid, nums, limit)){
+                ans = mid;
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return ans;
+    }
+
+    private static boolean checkMid(int mid, int[] nums, int limit) {
+        int i = 0;
+        int count = 0;
+        while (i + mid <= nums.length){
+            int max = nums[i];
+            int min = nums[i];
+            for (int j = i + 1; j < i + mid; j++){
+                if (nums[j] < min){
+                    min = nums[j];
+                }
+                if (nums[j] > max){
+                    max = nums[j];
+                }
+            }
+            int chazhi = Math.abs(max - min);
+            if (chazhi <= limit){
+                count++;
+                break;
+            }
+            i++;
+        }
+
+        return count > 0;
+
     }
 
     public static int longestSubarray(int[] nums, int limit) {
