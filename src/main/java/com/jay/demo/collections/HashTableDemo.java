@@ -9,9 +9,9 @@ import java.util.Hashtable;
  **/
 public class HashTableDemo {
     public static void main(String[] args) {
-//        Hashtable hashtable = new Hashtable();
-//        hashtable.put(null,"test");
-//        System.out.println(hashtable);
+        Hashtable hashtable = new Hashtable();
+        hashtable.put(null,"test");
+        System.out.println(hashtable);
 
         HashMap hashMap = new HashMap();
         hashMap.put(null,null);
