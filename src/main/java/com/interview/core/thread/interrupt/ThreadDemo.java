@@ -1,4 +1,4 @@
-package com.interview.core.thread;
+package com.interview.core.thread.interrupt;
 
 import org.junit.Test;
 
