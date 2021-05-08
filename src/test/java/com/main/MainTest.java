@@ -1,7 +1,10 @@
 package com.main;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.detaildemo.demo1.util.GsonUtils;
+import org.junit.Test;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * ClassName: MainTest
@@ -19,5 +22,39 @@ public class MainTest {
         System.out.println(list.size());
         list.add(1);
         System.out.println(list.size());
+    }
+
+    @Test
+    public void test2(){
+        Set<String> set = new HashSet<>();
+        set.add("123");
+        set.add("1c3");
+        set.add("1b");
+
+        Set<String> set2 = new HashSet<>();
+        set2.add("1234");
+        set2.add("1c3");
+        set2.add("1b4");
+
+        Set<String> set3 = set;
+
+        set.retainAll(set2);
+        System.out.println(GsonUtils.toJsonString(set));
+        System.out.println(GsonUtils.toJsonString(set2));
+        System.out.println(GsonUtils.toJsonString(set3));
+        set2.removeAll(set3);
+        System.out.println(GsonUtils.toJsonString(set2));
+    }
+
+    @Test
+    public void test(){
+        Set<String> set = new HashSet<>();
+        set.add("123");
+        set.add("1c3");
+        set.add("1b");
+        String collect = set.stream().collect(Collectors.joining(","));
+        System.out.println(collect);
+        List<String> strings = Arrays.asList(collect.split(","));
+        System.out.println(set.containsAll(strings));
     }
 }
