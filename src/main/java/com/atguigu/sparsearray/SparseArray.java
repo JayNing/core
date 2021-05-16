@@ -60,6 +60,20 @@ public class SparseArray {
             System.out.println();
         }
 
+        //将稀疏数组转成二维数组
+        int arr[][] = new int[sparseArr[0][0]][sparseArr[0][1]];
+        System.out.println(sparseArr.length);
+
+        for (int i = 1; i < sparseArr.length; i++){
+            arr[sparseArr[i][0]][sparseArr[i][1]] = sparseArr[i][2];
+        }
+        System.out.println("得到的二维数组～～～");
+        for (int[] data : arr) {
+            for (int datum : data) {
+                System.out.printf("%d\t",datum);
+            }
+            System.out.println();
+        }
     }
 
 }
