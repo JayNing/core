@@ -20,11 +20,15 @@ public class LinkListDemo {
         SingleLinkedList singleLinkedList = new SingleLinkedList();
 
         singleLinkedList.addNode(hero1);
-        singleLinkedList.addNode(hero2);
         singleLinkedList.addNode(hero3);
+        singleLinkedList.addNode(hero2);
         singleLinkedList.addNode(hero4);
 
         singleLinkedList.list();
+        System.out.println("反转～～");
+        singleLinkedList.reserveList();
+        singleLinkedList.list();
+
     }
 
 }
@@ -33,6 +37,22 @@ public class LinkListDemo {
 class SingleLinkedList{
     //先初始化一个头节点，头节点不要动
     private HeroNode head = new HeroNode(0,"","");
+
+    /**
+     * 反转链表
+     */
+    public void reserveList(){
+        HeroNode reserve = new HeroNode(0,"","");
+        HeroNode cur = head.next;
+        HeroNode next = null;
+        while (cur != null){
+            next = cur.next; //先暂时保存当前节点的下一个节点，因为后面需要
+            cur.next = reserve.next;
+            reserve.next = cur;
+            cur = next;
+        }
+        head = reserve;
+    }
 
     //添加节点到单向链表
     /**
