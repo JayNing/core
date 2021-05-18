@@ -20,7 +20,7 @@ public class ArrStackDemo {
 //        System.out.println("出栈测试～～～");
 //        System.out.println(arr.pop() == '/');
 
-        System.out.println("================");
+        System.out.println("===================");
 
         ArrStackDemo demo = new ArrStackDemo();
 
