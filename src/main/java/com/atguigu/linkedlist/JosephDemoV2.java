@@ -46,29 +46,29 @@ class CircleSingleLinkedList{
         //创建一个辅助节点帮助完成小孩出圈
         Boy helper = first;
 
-        //需要创建一个辅助节点curBoy，先让其指向环形链表的最后一个节点
+        //需要创建一个辅助节点helper，先让其指向环形链表的最后一个节点
         while (true){
             if (helper.getNext() == first){
-                //说明curBoy指向了最后一个小孩节点
+                //说明helper指向了最后一个小孩节点
                 break;
             }
             helper = helper.getNext();
         }
 
-        //小孩报数前，先让first和curBoy移动（startNo-1）次
+        //小孩报数前，先让first和helper移动（startNo-1）次
         for (int i = 0; i < startNo-1;i++){
             first = first.getNext();
             helper = helper.getNext();
         }
         //此时，first位于startNo起点的前一个节点
-        //当小孩开始报数时，让first和culBoy同时移动(countNum-1)次，然后出圈。
+        //当小孩开始报数时，让first和helper同时移动(countNum-1)次，然后出圈。
         //循环操作，直到圈中只有一个节点
         while (true){
             if (first == helper){
                 //说明圈中只有一个节点
                 break;
             }
-            //让first和culBoy同时移动(countNum-1)次
+            //让first和helper同时移动(countNum-1)次
             for (int j = 0; j < countNum - 1; j++){
                 first = first.getNext();
                 helper = helper.getNext();
