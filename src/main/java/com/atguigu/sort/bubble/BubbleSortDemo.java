@@ -7,18 +7,18 @@ import java.util.Arrays;
  * @Date 2021/5/24 8:36 下午
  * @Description 冒泡排序demo
  */
-public class BubbleDemo {
+public class BubbleSortDemo {
 
     public static void main(String[] args) {
         int[] arr = new int[]{1,3,5,2,3,7,1,3,-6,9};
         System.out.println("排序前：");
         System.out.println(Arrays.toString(arr));
-        bubble(arr);
+        bubbleSort(arr);
         System.out.println("排序后：");
         System.out.println(Arrays.toString(arr));
     }
 
-    public static void bubble(int[] arr){
+    public static void bubbleSort(int[] arr){
 
         int tmp;
         boolean isChange = false;
