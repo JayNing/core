@@ -35,13 +35,15 @@ public class ShellSortDemo {
             for (int i = gap; i < arr.length; i++){
                 int j = i;
                 int tmp = arr[j];
-                while (j - gap >= 0 && tmp < arr[j - gap]){
-                    //后移
-                    arr[j] = arr[j - gap];
-                    j-=gap;
+                if (arr[j] < arr[j - gap]){
+                    while (j - gap >= 0 && tmp < arr[j - gap]){
+                        //后移
+                        arr[j] = arr[j - gap];
+                        j-=gap;
+                    }
+                    //当while退出后，就给tmp找到了插入的位置
+                    arr[j] = tmp;
                 }
-                //当while退出后，就给tmp找到了插入的位置
-                arr[j] = tmp;
             }
         }
     }
