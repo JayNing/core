@@ -1,4 +1,4 @@
-package com.atguigu.sort.bubble;
+package com.atguigu.sort.bubblesort;
 
 import java.util.Arrays;
 
