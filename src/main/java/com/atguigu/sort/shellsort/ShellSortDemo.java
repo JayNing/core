@@ -30,7 +30,7 @@ public class ShellSortDemo {
      * 位移法————希尔排序
      * @param arr
      */
-    private static void shellSortMove(int[] arr) {
+    public static void shellSortMove(int[] arr) {
         for (int gap = arr.length / 2; gap > 0; gap/=2) {
             for (int i = gap; i < arr.length; i++){
                 int j = i;
@@ -52,7 +52,7 @@ public class ShellSortDemo {
      * 合并分步步骤，《交换法》，希尔排序，速度慢
      * @param arr
      */
-    private static void shellSortChange(int[] arr) {
+    public static void shellSortChange(int[] arr) {
 
         for (int gap = arr.length / 2; gap > 0; gap/=2) {
             for (int i = gap; i < arr.length; i++){
@@ -73,7 +73,7 @@ public class ShellSortDemo {
      * 分步推导排序---《交换法》——————【从小到大】
      * @param arr
      */
-    private static void shellSort(int[] arr) {
+    public static void shellSort(int[] arr) {
         int tmp = 0;
         //第一轮
         //第一轮增量5[10个元素]

@@ -34,7 +34,7 @@ public class QuickSortDemo {
      *              假设每次以排序区间的中间下标位置的数为分割点
      *              将数据从小到大排序，则分割点左侧的数要小于分割点右侧的数
      */
-    private static void quickSort(int[] arr, int left, int right) {
+    public static void quickSort(int[] arr, int left, int right) {
 
         int l = left;
         int r = right;

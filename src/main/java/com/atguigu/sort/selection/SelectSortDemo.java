@@ -34,8 +34,8 @@ public class SelectSortDemo {
                 arr[i] = min;
             }
 
-            System.out.println("第" + (i + 1) + "轮后~~~~");
-            System.out.println(Arrays.toString(arr));
+//            System.out.println("第" + (i + 1) + "轮后~~~~");
+//            System.out.println(Arrays.toString(arr));
         }
     }
 
