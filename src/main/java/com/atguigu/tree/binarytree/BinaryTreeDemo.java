@@ -31,10 +31,14 @@ public class BinaryTreeDemo {
         System.out.println("二叉树遍历测试~~~~");
         System.out.println("前序遍历~~~");
         binaryTree.preOrder();
-        System.out.println("中序遍历~~~");
-        binaryTree.midOrder();
-        System.out.println("后序遍历~~~");
-        binaryTree.postOrder();
+//        System.out.println("中序遍历~~~");
+//        binaryTree.midOrder();
+//        System.out.println("后序遍历~~~");
+//        binaryTree.postOrder();
+
+        binaryTree.delNode(10);
+        System.out.println("删除元素之后前序遍历~~~");
+        binaryTree.preOrder();
     }
 }
 
@@ -54,17 +58,17 @@ class BinaryTree {
     }
 
     //前序遍历
-    public void preOrder(){
-       if (root != null){
-           root.preOrder();
-       } else {
-           System.out.println("二叉树为空，没有节点~~~");
-       }
+    public void preOrder() {
+        if (root != null) {
+            root.preOrder();
+        } else {
+            System.out.println("二叉树为空，没有节点~~~");
+        }
     }
 
     //中序遍历
-    public void midOrder(){
-        if (root != null){
+    public void midOrder() {
+        if (root != null) {
             root.midOrder();
         } else {
             System.out.println("二叉树为空，没有节点~~~");
@@ -72,19 +76,40 @@ class BinaryTree {
     }
 
     //后序遍历
-    public void postOrder(){
-        if (root != null){
+    public void postOrder() {
+        if (root != null) {
             root.postOrder();
         } else {
             System.out.println("二叉树为空，没有节点~~~");
         }
     }
 
-    //add
+    /**
+     * delete 递归删除节点
+     * @param no
+     * 1、如果要删除的是叶子节点，则删除该节点
+     * 2、如果要删除的是非叶子节点，则删除该子树
+     *
+     * 思路：
+     * 1、因为二叉树是单向的，所以我们是判断当前节点的子节点是否需要删除节点，而不能去判断当前这个节点是不是需要删除节点
+     * 2、如果当前节点的左子节点不为空，并且左子节点就是要删除节点，就将this.left=null;并且就返回（结束递归删除）
+     * 3、如果当前节点的右子节点不为空，并且右子节点就是要删除节点，就将this.right=null;并且就返回（结束递归删除）
+     * 4、如果第2和3步没有删除节点，那么我们就需要向左子树进行递归删除
+     * 5、如果第4步也没有删除节点，则应当向右子树进行递归删除
+     */
+    public void delNode(int no) {
+        if (root == null){
+            System.out.println("空树，不能删除~~~");
+            return;
+        }
 
-    //find
-
-    //delete
+        if (root.no == no){
+            root = null;
+        } else {
+            //递归删除
+            root.delNode(no);
+        }
+    }
 }
 
 /**
@@ -100,6 +125,26 @@ class BinaryTreeNode{
     public BinaryTreeNode left;
     //右节点
     public BinaryTreeNode right;
+
+    public void delNode(int no){
+        if (this.left != null && this.left.no == no){
+            this.left = null;
+            return;
+        }
+
+        if (this.right != null && this.right.no == no){
+            this.right = null;
+            return;
+        }
+
+        if (this.left != null){
+            this.left.delNode(no);
+        }
+
+        if (this.right != null){
+            this.right.delNode(no);
+        }
+    }
 
     public BinaryTreeNode(int no, String name) {
         this.no = no;
