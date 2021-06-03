@@ -1,6 +1,4 @@
-package com.nowcoder;
-
-import java.util.*;
+package com.newcoder;
 
 /**
  * author JayNing
