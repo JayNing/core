@@ -1,9 +1,14 @@
 package com.main;
 
 import com.detaildemo.demo1.util.GsonUtils;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -22,6 +27,22 @@ public class MainTest {
         System.out.println(list.size());
         list.add(1);
         System.out.println(list.size());
+    }
+
+    @Test
+    public void testSchedule() throws InterruptedException {
+        ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1,
+                new BasicThreadFactory.Builder().namingPattern("simpleGroupBSImpl-schedule-pool-%d").daemon(true).build());
+
+        System.out.println("开始时间：" + LocalDateTime.now());
+
+        executorService.schedule(() -> {
+            System.out.println("执行时间：" + LocalDateTime.now());
+            System.out.println("哈哈哈哈");
+        },2,TimeUnit.SECONDS);
+
+        Thread.sleep(5000);
+
     }
 
     @Test

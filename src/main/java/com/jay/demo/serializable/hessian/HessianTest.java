@@ -78,6 +78,6 @@ public class HessianTest {
          */
         System.out.println(student.getAddress());
         System.out.println(student.getName());
-        System.out.println(stu.getHobby());
+        System.out.println(Student.getHobby());
     }
 }
