@@ -1,2 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.dynamic.code.configuration.DynamicCodeConfig
+
+com.jay.demo.spi.spring.service.SpringLoadBalance=\
+  com.jay.demo.spi.spring.service.impl.RandomSpringLoadBalance,\
+  com.jay.demo.spi.spring.service.impl.LRUSpringLoadBalance

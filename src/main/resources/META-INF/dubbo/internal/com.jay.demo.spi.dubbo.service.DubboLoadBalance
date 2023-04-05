@@ -1,0 +1,2 @@
+random=com.jay.demo.spi.dubbo.service.impl.RandomDubboLoadBalance
+lru=com.jay.demo.spi.dubbo.service.impl.LRUDubboLoadBalance
